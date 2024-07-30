@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./facebook-client
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"   # Змінено порт з 3000 на 80
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./facebook-server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80" # Змінено порт з 5000 на 8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: facebook
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+

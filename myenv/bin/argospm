@@ -1,0 +1,5 @@
+#!/home/roman/myenv/bin/python3
+
+from argostranslate import argospm
+
+argospm.main()
